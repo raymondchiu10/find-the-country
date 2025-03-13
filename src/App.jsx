@@ -1,48 +1,123 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import "./App.css";
 
 import countryCodes from "./utils/country-codes.json";
 
+const easyArr = Object.entries(countryCodes.easy);
+const medArr = Object.entries(countryCodes.medium);
+const hardArr = Object.entries(countryCodes.hard);
+const allArr = [...easyArr, ...medArr, ...hardArr];
+
 function App() {
-	const [difficulty, setDifficulty] = useState();
+	const [easyHold, setEasyHold] = useState(easyArr);
+	const [medHold, setMedHold] = useState(medArr);
+	const [hardHold, setHardHold] = useState(hardArr);
+	const [allHold, setAllHold] = useState(allArr);
+
 	const [selectedFlag, setSelectedFlag] = useState();
 
-	const easyArr = Object.entries(countryCodes.easy);
-	const medArr = Object.entries(countryCodes.medium);
-	const hardArr = Object.entries(countryCodes.hard);
-	const allArr = [...easyArr, ...medArr, ...hardArr];
-
-	const setDifficultyLevel = (diff) => {
-		setDifficulty(diff);
-		const flagIndex = Math.floor(Math.random() * diff.length);
-		setSelectedFlag(diff[flagIndex]);
+	const flagSelector = (diff) => {
+		if (diff === "easy") {
+			const flagIndex = Math.floor(Math.random() * easyHold.length);
+			setSelectedFlag(easyHold[flagIndex]);
+		}
+		if (diff === "med") {
+			const flagIndex = Math.floor(Math.random() * medHold.length);
+			setSelectedFlag(medHold[flagIndex]);
+		}
+		if (diff === "hard") {
+			const flagIndex = Math.floor(Math.random() * hardHold.length);
+			setSelectedFlag(hardHold[flagIndex]);
+		}
+		if (diff === "all") {
+			const flagIndex = Math.floor(Math.random() * allHold.length);
+			setSelectedFlag(allHold[flagIndex]);
+		}
 	};
+
+	const guess = (guessVal, diff) => {
+		if (diff === "easy") {
+			const item = easyHold.filter((i) => i !== selectedFlag);
+
+			setEasyHold(item);
+
+			flagSelector("easy");
+		}
+
+		if (diff === "med") {
+			const item = medHold.filter((i) => i !== selectedFlag);
+			setMedHold(item);
+
+			flagSelector("med");
+		}
+
+		if (diff === "hard") {
+			const item = medHold.filter((i) => i !== selectedFlag);
+			setHardHold(item);
+
+			flagSelector("hard");
+		}
+
+		if (diff === "all") {
+			const item = medHold.filter((i) => i !== selectedFlag);
+			setAllHold(item);
+
+			flagSelector("all");
+		}
+	};
+
+	useEffect(() => {
+		if (easyHold.length <= 1) {
+			setEasyHold(easyArr);
+		}
+	}, [easyHold]);
+
+	useEffect(() => {
+		if (medHold.length <= 1) {
+			setMedHold(medArr);
+		}
+	}, [medHold]);
+
+	useEffect(() => {
+		if (hardHold.length <= 1) {
+			setHardHold(hardArr);
+		}
+	}, [hardHold]);
+
+	useEffect(() => {
+		if (allHold.length <= 1) {
+			setAllHold(easyArr);
+		}
+	}, [allHold]);
+
 	return (
 		<section>
+			<button onClick={() => guess("??", "easy")}>Guess</button>
+
 			<button
 				onClick={() => {
-					setDifficultyLevel(allArr);
+					flagSelector("all");
 				}}
 			>
 				All
 			</button>
 			<button
 				onClick={() => {
-					setDifficultyLevel(easyArr);
+					flagSelector("easy");
 				}}
 			>
 				Easy
 			</button>
 			<button
 				onClick={() => {
-					setDifficultyLevel(medArr);
+					flagSelector("med");
 				}}
 			>
 				Medium
 			</button>
 			<button
 				onClick={() => {
-					setDifficultyLevel(hardArr);
+					flagSelector("hard");
 				}}
 			>
 				Hard
