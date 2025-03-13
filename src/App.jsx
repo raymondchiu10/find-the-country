@@ -1,35 +1,21 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import "./App.css";
+
+import countryCodes from "./utils/country-codes.json";
 
 function App() {
-  const [count, setCount] = useState(0)
+	console.log(Object.entries(countryCodes).filter((item) => item[1].includes("Canada")));
 
-  return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+	const testArr = Object.entries(countryCodes);
+
+	console.log(testArr.length);
+
+	return (
+		<>
+			{testArr.map((item) => {
+				return <img src={`https://flagcdn.com/${item[0]}.svg`} alt={`country code ${item[1]}`} width={100} />;
+			})}
+		</>
+	);
 }
 
-export default App
+export default App;
