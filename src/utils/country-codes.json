@@ -2,13 +2,7 @@
 	"easy": {
 		"ca": "Canada",
 		"mx": "Mexico",
-		"us": "United States",
-		"br": "Brazil"
-	},
-	"easy2": {
-		"ca": "Canada",
-		"mx": "Mexico",
-		"us": "United States",
+		"us": "United States of America",
 		"br": "Brazil",
 		"cn": "China",
 		"fr": "France",
@@ -103,7 +97,7 @@
 		"cc": "Cocos (Keeling) Islands",
 		"cd": "DR Congo",
 		"cf": "Central African Republic",
-		"cg": "Republic of the Congo",
+		"cg": "Democratic Republic of the Congo",
 		"ci": "Côte d'Ivoire (Ivory Coast)",
 		"ck": "Cook Islands",
 		"cm": "Cameroon",

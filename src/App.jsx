@@ -1,7 +1,8 @@
 import { useState, useEffect } from "react";
-import "./App.css";
+import "./App.scss";
 
 import countryCodes from "./utils/country-codes.json";
+import LeafMap from "./components/LeafMap/LeafMap";
 
 const easyArr = Object.entries(countryCodes.easy);
 const medArr = Object.entries(countryCodes.medium);
@@ -91,45 +92,51 @@ function App() {
 	}, [allHold]);
 
 	return (
-		<section>
-			<button onClick={() => guess("??", "easy")}>Guess</button>
+		<section className="app">
+			<div>
+				<button onClick={() => guess("??", "easy")}>Guess</button>
 
-			<button
-				onClick={() => {
-					flagSelector("all");
-				}}
-			>
-				All
-			</button>
-			<button
-				onClick={() => {
-					flagSelector("easy");
-				}}
-			>
-				Easy
-			</button>
-			<button
-				onClick={() => {
-					flagSelector("med");
-				}}
-			>
-				Medium
-			</button>
-			<button
-				onClick={() => {
-					flagSelector("hard");
-				}}
-			>
-				Hard
-			</button>
+				<button
+					onClick={() => {
+						flagSelector("all");
+					}}
+				>
+					All
+				</button>
+				<button
+					onClick={() => {
+						flagSelector("easy");
+					}}
+				>
+					Easy
+				</button>
+				<button
+					onClick={() => {
+						flagSelector("med");
+					}}
+				>
+					Medium
+				</button>
+				<button
+					onClick={() => {
+						flagSelector("hard");
+					}}
+				>
+					Hard
+				</button>
 
-			{selectedFlag && (
-				<img
-					src={`https://flagcdn.com/${selectedFlag[0]}.svg`}
-					alt={`country code ${selectedFlag[1]}`}
-					width={100}
-				/>
-			)}
+				{selectedFlag && (
+					<div className="app__flag">
+						<img
+							src={`https://flagcdn.com/${selectedFlag[0]}.svg`}
+							alt={`country code ${selectedFlag[1]}`}
+							width={100}
+						/>
+					</div>
+				)}
+			</div>
+
+			<LeafMap selectedFlag={selectedFlag} />
 		</section>
 	);
 }
