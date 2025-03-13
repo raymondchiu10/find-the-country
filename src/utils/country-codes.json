@@ -12,19 +12,19 @@
 		"se": "Sweden",
 		"ch": "Switzerland",
 		"gb": "United Kingdom",
-		"jm": "Jamaica",
-		"gr": "Greece",
 		"ua": "Ukraine",
 		"kr": "South Korea",
-		"ru": "Russia",
-		"ar": "Argentina"
+		"ru": "Russia"
 	},
 	"medium": {
+		"ar": "Argentina",
 		"sa": "Saudi Arabia",
 		"gb-sct": "Scotland",
 		"fi": "Finland",
 		"cz": "Czechia",
+		"jm": "Jamaica",
 		"it": "Italy",
+		"gr": "Greece",
 		"il": "Israel",
 		"dk": "Denmark",
 		"ng": "Nigeria",

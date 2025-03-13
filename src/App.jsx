@@ -1,20 +1,61 @@
+import { useState } from "react";
 import "./App.css";
 
 import countryCodes from "./utils/country-codes.json";
 
 function App() {
-	console.log(Object.entries(countryCodes).filter((item) => item[1].includes("Canada")));
+	const [difficulty, setDifficulty] = useState();
+	const [selectedFlag, setSelectedFlag] = useState();
 
-	const testArr = Object.entries(countryCodes);
+	const easyArr = Object.entries(countryCodes.easy);
+	const medArr = Object.entries(countryCodes.medium);
+	const hardArr = Object.entries(countryCodes.hard);
+	const allArr = [...easyArr, ...medArr, ...hardArr];
 
-	console.log(testArr.length);
-
+	const setDifficultyLevel = (diff) => {
+		setDifficulty(diff);
+		const flagIndex = Math.floor(Math.random() * diff.length);
+		setSelectedFlag(diff[flagIndex]);
+	};
 	return (
-		<>
-			{testArr.map((item) => {
-				return <img src={`https://flagcdn.com/${item[0]}.svg`} alt={`country code ${item[1]}`} width={100} />;
-			})}
-		</>
+		<section>
+			<button
+				onClick={() => {
+					setDifficultyLevel(allArr);
+				}}
+			>
+				All
+			</button>
+			<button
+				onClick={() => {
+					setDifficultyLevel(easyArr);
+				}}
+			>
+				Easy
+			</button>
+			<button
+				onClick={() => {
+					setDifficultyLevel(medArr);
+				}}
+			>
+				Medium
+			</button>
+			<button
+				onClick={() => {
+					setDifficultyLevel(hardArr);
+				}}
+			>
+				Hard
+			</button>
+
+			{selectedFlag && (
+				<img
+					src={`https://flagcdn.com/${selectedFlag[0]}.svg`}
+					alt={`country code ${selectedFlag[1]}`}
+					width={100}
+				/>
+			)}
+		</section>
 	);
 }
 
