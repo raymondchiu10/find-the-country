@@ -21,6 +21,7 @@ function App() {
 		if (diff === "easy") {
 			const flagIndex = Math.floor(Math.random() * easyHold.length);
 			setSelectedFlag(easyHold[flagIndex]);
+			console.log(easyHold[flagIndex]);
 		}
 		if (diff === "med") {
 			const flagIndex = Math.floor(Math.random() * medHold.length);
