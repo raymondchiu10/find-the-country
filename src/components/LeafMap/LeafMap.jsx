@@ -4,14 +4,12 @@ import { MapContainer, TileLayer, GeoJSON } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
 
 const LeafMap = (props) => {
-	const { selectedFlag } = props;
+	const { selectedFlag, saveFlag } = props;
 	const [mouseOver, setMouseOver] = useState();
 	const [click, setClick] = useState();
 	const [countries, setCountries] = useState();
 
 	const [answer, setAnswer] = useState();
-
-	console.log("???", selectedFlag);
 
 	useEffect(() => {
 		fetch("https://raw.githubusercontent.com/datasets/geo-countries/master/data/countries.geojson")
@@ -110,9 +108,8 @@ const LeafMap = (props) => {
 							});
 							layer.on("click", () => {
 								const clickedCountry = feature.properties.ADMIN;
-								console.log(selectedFlag, clickedCountry);
 								alert(
-									clickedCountry === selectedFlag
+									clickedCountry === saveFlag.current[1]
 										? "You got the right country"
 										: "you got the wrong country"
 								);

@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import "./App.scss";
 
 import countryCodes from "./utils/country-codes.json";
@@ -16,24 +16,29 @@ function App() {
 	const [allHold, setAllHold] = useState(allArr);
 
 	const [selectedFlag, setSelectedFlag] = useState();
+	const saveFlag = useRef();
+
 
 	const flagSelector = (diff) => {
 		if (diff === "easy") {
 			const flagIndex = Math.floor(Math.random() * easyHold.length);
 			setSelectedFlag(easyHold[flagIndex]);
-			console.log(easyHold[flagIndex]);
+			saveFlag.current = easyHold[flagIndex];
 		}
 		if (diff === "med") {
 			const flagIndex = Math.floor(Math.random() * medHold.length);
 			setSelectedFlag(medHold[flagIndex]);
+			saveFlag.current = medHold[flagIndex];
 		}
 		if (diff === "hard") {
 			const flagIndex = Math.floor(Math.random() * hardHold.length);
 			setSelectedFlag(hardHold[flagIndex]);
+			saveFlag.current = hardHold[flagIndex];
 		}
 		if (diff === "all") {
 			const flagIndex = Math.floor(Math.random() * allHold.length);
 			setSelectedFlag(allHold[flagIndex]);
+			saveFlag.current = allHold[flagIndex];
 		}
 	};
 
@@ -137,7 +142,7 @@ function App() {
 				)}
 			</div>
 
-			<LeafMap selectedFlag={selectedFlag} />
+			<LeafMap selectedFlag={selectedFlag} saveFlag={saveFlag} />
 		</section>
 	);
 }
